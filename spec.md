@@ -53,13 +53,15 @@
 
         // if null, then consider user is not login yet.
         user : {
-            name : "John doe",
+            name : "John doe,
             point : '5000pt'
         }
 
+        event : {
+            userSearchEventName : 'user_search_clicked',
+            cartIconClicked : 'cart_icon_clicked'
+        }
 
     }
 
 ```
-
-### Test Cases
