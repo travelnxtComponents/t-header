@@ -51,6 +51,26 @@
             } 
         },
 
+        email : "enquiry@travelnxt.com",
+        phone : "1800-948-4455",
+
+        languages : [
+            {
+                name : "United State(English)",
+                code : "en-us"
+            }
+        ],
+
+        logo : "url",
+
+        allowCurrencies : [
+            {
+                name : "US Doller",
+                value :"USD"
+            }
+        ]
+
+
         // if null, then consider user is not login yet.
         user : {
             name : "John doe",
@@ -65,3 +85,4 @@
     }
 
 ```
+## Test Cases
