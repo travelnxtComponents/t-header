@@ -5,7 +5,7 @@
 ### Component Signature
 
 ```html
-    <t-header data-options = [[options]]  user=[[user]]>
+    <t-header data-options = [[options]]  user=[[user]] recent-search-count="2" cart-items-count="2">
     </t-header>
 ```
 
@@ -22,6 +22,8 @@
             // menu item with url
             {
                 name : 'Hotel',
+                selected : true,
+                icon : 'hotel-icon-url',
                 url : '/hotel'
             },
 
@@ -31,14 +33,29 @@
                 eventName : 'activity_option_selected'
             }
         ],
+        
+        recentSearch:{
+             title : "Recent Search",
+             icon : "icon-path",
+             eventName = "recent_search_clicked"
+        },
+        
+        
+        tripCart:{
+             title : "Trip Cart",
+             icon : "icon-path",
+             eventName = "trip-cart-link-clicked"
+        },
 
         topBar : {
             registrationLink : {
                 name : 'Register',
+                icon : 'icon-url'
                 url:'/register'
             },
             login : {
                 name : 'Login',
+                icon : 'icon-url'
                 url : '/login'
             },
             profile :{
@@ -48,11 +65,11 @@
             mytrips : {
                 name : 'My Trips',
                 url : '/mytrips'
-            } 
-        },
-
-        email : "enquiry@travelnxt.com",
-        phone : "1800-948-4455",
+            },
+            
+            email : "enquiry@travelnxt.com",
+            phone : "1800-948-4455",
+        },        
 
         languages : [
             {
@@ -68,18 +85,13 @@
                 name : "US Doller",
                 value :"USD"
             }
-        ]
-
-
-        
+        ],       
 
         event : {
-            userSearchEventName : 'user_search_clicked',
-            cartIconClicked : 'cart_icon_clicked'
+            currencyChanged : 'currency_selection_changed'
         }
 
     };
-
 
 
     // User attribute
