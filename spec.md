@@ -49,12 +49,12 @@
 
         topBar : {
             registrationLink : {
-                name : 'Register',
+                name : 'SignUp',
                 icon : 'icon-url'
                 url:'/register'
             },
             login : {
-                name : 'Login',
+                name : 'SignIn',
                 icon : 'icon-url'
                 url : '/login'
             },
@@ -68,7 +68,9 @@
             },
             
             email : "enquiry@travelnxt.com",
+            emailicon : 'icon-url'
             phone : "1800-948-4455",
+            phoneicon : 'icon-url'
         },        
 
         languages : [
