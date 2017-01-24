@@ -40,15 +40,15 @@
              title : "Recent Search",
              icon : "icon-path",
              eventName = "recent-search-clicked",
-             recent-search-count="2"
+             recent-search-count="2"}
         },
         
         shoppingCart:{
              title : "Trip Cart",
              icon : "icon-path",
              eventName = "trip-cart-link-clicked",
-             cart-items-count="2"
-        }}        
+             cart-items-count="2"}
+        }
         ],
         
         topBar : {
