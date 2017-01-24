@@ -17,7 +17,7 @@
     options = {
 
         // menu items 
-        menus :[
+        primaryMenus :[
             
             // menu item with url
             {
@@ -34,7 +34,9 @@
             }
         ],
         
-        scratchPad:{
+        secondaryMenus :[
+        {
+            scratchPad:{
              title : "Recent Search",
              icon : "icon-path",
              eventName = "recent-search-clicked",
@@ -46,8 +48,9 @@
              icon : "icon-path",
              eventName = "trip-cart-link-clicked",
              cart-items-count="2"
-        },
-
+        }        
+        ],
+        
         topBar : {
             registrationLink : {
                 name : 'SignUp',
