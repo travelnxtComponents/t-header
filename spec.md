@@ -5,7 +5,7 @@
 ### Component Signature
 
 ```html
-    <t-header data-options = [[options]]  user=[[user]] recent-search-count="2" cart-items-count="2">
+    <t-header data-options = [[options]]  user=[[user]]>
     </t-header>
 ```
 
@@ -30,21 +30,22 @@
             // menu item with event
             {
                 name : 'Activity',
-                eventName : 'activity_option_selected'
+                eventName : 'activity-option-selected'
             }
         ],
         
-        recentSearch:{
+        scratchPad:{
              title : "Recent Search",
              icon : "icon-path",
-             eventName = "recent_search_clicked"
+             eventName = "recent-search-clicked",
+             recent-search-count="2"
         },
         
-        
-        tripCart:{
+        shoppingCart:{
              title : "Trip Cart",
              icon : "icon-path",
-             eventName = "trip-cart-link-clicked"
+             eventName = "trip-cart-link-clicked",
+             cart-items-count="2"
         },
 
         topBar : {
@@ -90,7 +91,7 @@
         ],       
 
         event : {
-            currencyChanged : 'currency_selection_changed'
+            currencyChanged : 'currency-selection-changed'
         }
 
     };
