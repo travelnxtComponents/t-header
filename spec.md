@@ -48,7 +48,7 @@
              icon : "icon-path",
              eventName = "trip-cart-link-clicked",
              cart-items-count="2"
-        }        
+        }}        
         ],
         
         topBar : {
