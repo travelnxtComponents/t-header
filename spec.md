@@ -124,7 +124,7 @@
 
 ## Test Cases
 
-- Header should work in all major browsers - Chrome / Mozilla / Safari / Opera / IE etc.
+- Component should work in all major browsers - Chrome / Mozilla / Safari / Opera / IE etc.
 - Desktop frame would be 1170 , Tablet 750 and for mobile 320
 - Header email - Clicking on email should open the mail box
 - Selection of Country and Currency should be visible in header till user changes it.
@@ -141,7 +141,7 @@
 - Any component if opened via [web page tester](https://www.webpagetest.org/), it should load under 500ms (milli seconds).
 
 ## Documents
-- Visual designs for search components - https://projects.invisionapp.com/share/6E9PJ7R4Q#/screens/212067485
+- Visual designs for Header components - https://projects.invisionapp.com/share/6E9PJ7R4Q#/screens/212067485
 - API access : Url - http://demo.travelnxt.com/dev
 - Tavisca Elements - https://github.com/atomelements and https://github.com/travelnxtelements
 - Vaadin elements - https://vaadin.com/docs/-/part/elements/elements-getting-started.html
