@@ -115,6 +115,8 @@
 - Country and Currency list will be provided from outside and list will open up in paper-dropdown-menu
 - In Tablet only icons will be visible for tripcart and RecentSearches.
 - Currently in design only 4 tabs are available but system should have implementation to handle multiple tabs in header
+- Icons for loggedin and non loggedin user
+- Mobile-> menu items to change, should purely derived from Header data
 - Misc items to be handled from CSS like:
 1. Background color of outer container.
 2. Mixin (to control outer width)
