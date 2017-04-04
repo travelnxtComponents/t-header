@@ -189,3 +189,7 @@ Need variable for defining hover or selection background colour
 Need mixin for defining selected option styles
 Need mixin for defining count option styles
 ```
+# Ballpark estimates
+```javascript
+1 Week/ 7 man days
+```
