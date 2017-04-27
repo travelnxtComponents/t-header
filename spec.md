@@ -196,6 +196,8 @@ Need mixin for defining count option styles
 
 ## Test Cases
 - Component should work across all major browsers - Chrome / Mozilla / Safari / Opera / IE etc.
+- Verify all exposed public properties are working independently and with complex combination.
+- Verify all exposed methods and events are working.
 
 ## Steps to Start
 - Set Github repository at your end for this project, we will merge them later
