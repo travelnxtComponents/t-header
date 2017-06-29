@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+	<head>
+		<title>t-header demo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
+		<link rel="import" href="../t-header.html">
+
+		<style is="custom-style" include="demo-pages-shared-styles">
+		body{
+			padding: 0px;
+		}
+		.prelogin-content{
+		padding: 100px;
+		}
+		.postlogin-content{
+		padding: 100px;
+		}
+
+		</style>
+	</head>
+	<body>
+
+		<template id="t-header-emulator" is="dom-bind">
+			<t-header data="[[data]]" user="[[user]]">
+        <div class="prelogin-content">tests </div>
+        <div class="postlogin-content">Ipsum vero minima accusamus debitis omnis temporibus, expedita? Consequatur repudiandae consectetur suscipit et explicabo quae. Maxime a magnam nulla suscipit quos. Vitae saepe at nihil aliquid debitis quia? Deserunt accusamusi</div>
+			</t-header>
+		</template>
+		<script>
+var t =  document.querySelector('#t-header-emulator');
+t.data = {
+	primaryMenu :{
+		selectedIndex:0,
+		items: [
+		{
+			label : 'Flight',
+			icon : 'maps:flight',
+			eventName : 'activity-option-selected'
+		},
+		{
+			label : 'Hotel',
+			icon : 'maps:hotel',
+			url : ''
+		},
+		{
+			label : 'Car',
+			icon : 'maps:directions-car',
+			eventName : 'activity-option-selected'
+		},
+		{
+			label : 'Activity',
+			icon : 'maps:directions-run',
+			eventName : 'activity-option-selected'
+		},
+		{
+			label : 'Flight',
+			icon : 'maps:flight',
+			url : '/hotel'
+		},
+		{
+			label : 'Hotel',
+			icon : 'maps:hotel',
+			eventName : 'activity-option-selected'
+		},
+		{
+			label : 'Car',
+			icon : 'maps:directions-car',
+			eventName : 'activity-option-selected'
+		},
+		{
+			label : 'Activity',
+			icon : 'maps:directions-run',
+			eventName : 'activity-option-selected'
+		}
+		]
+	},
+	mainToolbar :[
+	{
+		label : "Trip Cart",
+		icon : "shopping-cart",
+		eventName : "trip-cart-link-clicked",
+    count: 20
+	}
+	],
+	recentSearch: {
+		label : "Recent Searches",
+		icon : "search",
+		eventName : "Recent search clicked",
+		count: 20
+	},
+	topLeftToolbar:[
+	{
+		"title": "1800-958-1000",
+		"icon":  "communication:phone",
+		"url": "tel:18009581000"
+	},
+	{
+		"title": "enquiry@travelnxt.com",
+		"icon": "mail",
+		"url": "mailto:enquiry@travelnxt.com"
+	}
+	],
+	topEndMenu:[
+	{
+		"code": "ctr-sel",
+		"label": "Country",
+		"isIconMenu": true,
+		"selectedItem": "0",
+		"eventName": "country_changed",
+		"options": [
+		{"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/af.svg", "title" : "United State(English)", "value" : "en-us" },
+		{"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-in" },
+		{"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-ts" },
+		{"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/fo.svg", "title" : "Test Case 2(English)", "value" : "en-uk" },
+		{"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/cz.svg", "title" : "Test States 1(English)", "value" : "en-js" }
+		]
+	},
+	{
+		"code": "currency-sel",
+		"isIconMenu": false,
+		"label": "Currency",
+		"selectedItem": "0",
+		"eventName": "currency_changed",
+		"options": [
+		{title:"Australian Dollar", value:"AUD"},
+		{ title:"Brazilian Real ",value:"BRL" },
+		{ title:"Danish Krone",value:"DKK" },
+		{ title:"Czech Koruna",value:"CZK" },
+		{ title:"Canadian Dollar",value:"CAD" },
+		{ title : "US Dollar", value :"USD" }
+		]
+	}
+	],
+	logo : {
+		 imageUrl:"https://s3.amazonaws.com/travelnxt-graphics/Backoffice/20043/Images/38cac74e-a177-432e-8c97-507b35f67c69",
+		url: '#'
+}
+};
+
+t.user= {
+	"isLoggedIn": false,
+	"preLogin": {
+		"title": "Sign Up / Sign In",
+		"icon": "account-circle",
+		"code": "signup",
+		"url": "/register"
+	},
+	"postLogin": {
+		"title": "John Doe",
+		"icon": "account-circle",
+		"code": "signedin",
+		"type": "select",
+		"selectedItem": 0
+	}
+};
+
+t.addEventListener('t-header-main-toolbar-tapped', function(e){
+	console.log(e);
+});
+
+		</script>
+	</body>
+</html>

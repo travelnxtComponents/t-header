@@ -1,0 +1,902 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>t-header test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../t-header.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <t-header data="[[data]]" user="[[user]]"></t-header>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="headerWithoutPrimaryMenu">
+      <template>
+        <t-header data="[[data]]" user="[[user]]"></t-header>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="headerWithoutSecondaryMenu">
+      <template>
+        <t-header data="[[data]]" user="[[user]]"></t-header>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="headerWithoutTopStartMenu">
+      <template>
+        <t-header data="[[data]]" user="[[user]]"></t-header>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="headerWithoutTopEndMenu">
+      <template>
+        <t-header data="[[data]]" user="[[user]]"></t-header>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="headerWithoutRecentSearch">
+      <template>
+        <t-header data="[[data]]" user="[[user]]"></t-header>
+      </template>
+    </test-fixture>
+
+    <script>
+
+suite('t-header', function() {
+  var header;
+  var headerWithoutPrimaryMenu;
+  var headerWithoutSecondaryMenu;
+  var headerWithoutTopStartMenu;
+  var headerWithoutTopEndMenu;
+  var headerWithoutRecentSearch;
+
+  function setupHeaderWithoutTopStartMenu(){
+    var data = {
+      primaryMenu :{
+        selectedIndex:0,
+        items: [
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          url : 'https://google.com'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          url : '/hotel'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        }
+        ]
+      },
+      mainToolbar :[
+      {
+        label : "Trip Cart",
+        icon : "shopping-cart",
+        eventName : "trip-cart-link-clicked",
+        count: 20
+      }
+      ],
+      recentSearch: {
+        label : "Recent Searches",
+        icon : "search",
+        eventName : "Recent search clicked",
+        count: 0
+      },
+      topEndMenu:[
+      {
+        "code": "ctr-sel",
+        "label": "Country",
+        "isIconMenu": true,
+        "selectedItem": "0",
+        "eventName": "country_changed",
+        "options": [
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/af.svg", "title" : "United State(English)", "value" : "en-us" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-in" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-ts" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/fo.svg", "title" : "Test Case 2(English)", "value" : "en-uk" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/cz.svg", "title" : "Test States 1(English)", "value" : "en-js" }
+        ]
+      },
+      {
+        "code": "currency-sel",
+        "isIconMenu": false,
+        "label": "Currency",
+        "selectedItem": "0",
+        "eventName": "currency_changed",
+        "options": [
+        {title:"Australian Dollar", value:"AUD"},
+        { title:"Brazilian Real ",value:"BRL" },
+        { title:"Danish Krone",value:"DKK" },
+        { title:"Czech Koruna",value:"CZK" },
+        { title:"Canadian Dollar",value:"CAD" },
+        { title : "US Dollar", value :"USD" }
+        ]
+      }
+      ],
+      logo : "http://www.tavisca.com/wp-content/uploads/travelnxt.png",
+    };
+
+    var user= {
+      "isLoggedIn": true,
+      "preLogin": {
+        "title": "Sign Up / Sign In",
+        "icon": "account-circle",
+        "url": "/register"
+      },
+      "postLogin": {
+        "title": "John Doe",
+        "icon": "account-circle"
+      }
+    };
+
+    headerWithoutTopStartMenu = fixture('headerWithoutTopStartMenu');
+    headerWithoutTopStartMenu.data = data;
+    headerWithoutTopStartMenu.user = user;
+  }
+
+  function setupHeaderWithoutPrimaryMenu(){
+    var data = {
+      mainToolbar :[
+      {
+        label : "Trip Cart",
+        icon : "shopping-cart",
+        eventName : "trip-cart-link-clicked",
+        count: 20
+      }
+      ],
+      recentSearch: {
+        label : "Recent Searches",
+        icon : "search",
+        eventName : "Recent search clicked",
+        count: 20
+      },
+      topBar : {
+        signUp : {
+          label : 'Sign Up',
+          icon : 'icon-url',
+          url:'/register'
+        },
+        signIn : {
+          label : 'Sign In',
+          icon : 'icon-url',
+          url : '/login'
+        },
+        profile :{
+          label : 'Profile',
+          url : '/profile'
+        },
+        mytrips : {
+          label : 'My Trips',
+          url : '/mytrips'
+        },
+        email : "enquiry@travelnxt.com",
+        emailIcon : 'mail',
+        phone : "1800-948-4455",
+        phoneIcon : 'communication:phone'
+      },
+      topLeftToolbar:[
+      {
+        "title": "1800-958-1000",
+        "icon":  "communication:phone",
+        "url": "tel:18009581000"
+      },
+      {
+        "title": "enquiry@travelnxt.com",
+        "icon": "mail",
+        "url": "mailto:enquiry@travelnxt.com"
+      }
+      ],
+      topEndMenu:[
+      {
+        "code": "ctr-sel",
+        "label": "Country",
+        "isIconMenu": true,
+        "selectedItem": "0",
+        "eventName": "country_changed",
+        "options": [
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/af.svg", "title" : "United State(English)", "value" : "en-us" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-in" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-ts" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/fo.svg", "title" : "Test Case 2(English)", "value" : "en-uk" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/cz.svg", "title" : "Test States 1(English)", "value" : "en-js" }
+        ]
+      },
+      {
+        "code": "currency-sel",
+        "isIconMenu": false,
+        "label": "Currency",
+        "selectedItem": "0",
+        "eventName": "currency_changed",
+        "options": [
+        {title:"Australian Dollar", value:"AUD"},
+        { title:"Brazilian Real ",value:"BRL" },
+        { title:"Danish Krone",value:"DKK" },
+        { title:"Czech Koruna",value:"CZK" },
+        { title:"Canadian Dollar",value:"CAD" },
+        { title : "US Dollar", value :"USD" }
+        ]
+      }
+      ],
+      logo : "http://www.tavisca.com/wp-content/uploads/travelnxt.png",
+    };
+
+    var user= {
+      "isLoggedIn": true,
+      "preLogin": {
+        "title": "Sign Up / Sign In",
+        "icon": "account-circle",
+        "url": "/register"
+      },
+      "postLogin": {
+        "title": "John Doe",
+        "icon": "account-circle"
+      }
+    };
+
+    headerWithoutPrimaryMenu = fixture('headerWithoutPrimaryMenu');
+    headerWithoutPrimaryMenu.data = data;
+    headerWithoutPrimaryMenu.user = user;
+  }
+
+  function setupHeaderWithoutSecondaryMenu(){
+    var data = {
+      primaryMenu :{
+        selectedIndex:0,
+        items: [
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          url : 'https://google.com'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          url : '/hotel'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        }
+        ]
+      },
+      recentSearch: {
+        label : "Recent Searches",
+        icon : "search",
+        eventName : "Recent search clicked",
+        count: 20
+      },
+      topBar : {
+        signUp : {
+          label : 'Sign Up',
+          icon : 'icon-url',
+          url:'/register'
+        },
+        signIn : {
+          label : 'Sign In',
+          icon : 'icon-url',
+          url : '/login'
+        },
+        profile :{
+          label : 'Profile',
+          url : '/profile'
+        },
+        mytrips : {
+          label : 'My Trips',
+          url : '/mytrips'
+        },
+        email : "enquiry@travelnxt.com",
+        emailIcon : 'mail',
+        phone : "1800-948-4455",
+        phoneIcon : 'communication:phone'
+      },
+      topLeftToolbar:[
+      {
+        "title": "1800-958-1000",
+        "icon":  "communication:phone",
+        "url": "tel:18009581000"
+      },
+      {
+        "title": "enquiry@travelnxt.com",
+        "icon": "mail",
+        "url": "mailto:enquiry@travelnxt.com"
+      }
+      ],
+      topEndMenu:[
+      {
+        "code": "ctr-sel",
+        "label": "Country",
+        "isIconMenu": true,
+        "selectedItem": "0",
+        "eventName": "country_changed",
+        "options": [
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/af.svg", "title" : "United State(English)", "value" : "en-us" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-in" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-ts" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/fo.svg", "title" : "Test Case 2(English)", "value" : "en-uk" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/cz.svg", "title" : "Test States 1(English)", "value" : "en-js" }
+        ]
+      },
+      {
+        "code": "currency-sel",
+        "isIconMenu": false,
+        "label": "Currency",
+        "selectedItem": "0",
+        "eventName": "currency_changed",
+        "options": [
+        {title:"Australian Dollar", value:"AUD"},
+        { title:"Brazilian Real ",value:"BRL" },
+        { title:"Danish Krone",value:"DKK" },
+        { title:"Czech Koruna",value:"CZK" },
+        { title:"Canadian Dollar",value:"CAD" },
+        { title : "US Dollar", value :"USD" }
+        ]
+      }
+      ],
+      logo : "http://www.tavisca.com/wp-content/uploads/travelnxt.png",
+    };
+
+    var user= {
+      "isLoggedIn": true,
+      "preLogin": {
+        "title": "Sign Up / Sign In",
+        "icon": "account-circle",
+        "url": "/register"
+      },
+      "postLogin": {
+        "title": "John Doe",
+        "icon": "account-circle"
+      }
+    };
+
+    headerWithoutSecondaryMenu = fixture('headerWithoutSecondaryMenu');
+    headerWithoutSecondaryMenu.data = data;
+    headerWithoutSecondaryMenu.user = user;
+  }
+
+  function setupHeaderWithoutTopEndMenu(){
+    var data = {
+      primaryMenu :{
+        selectedIndex:0,
+        items: [
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          url : 'https://google.com'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          url : '/hotel'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        }
+        ]
+      },
+      mainToolbar :[
+      {
+        label : "Trip Cart",
+        icon : "shopping-cart",
+        eventName : "trip-cart-link-clicked",
+        count: 20
+      }
+      ],
+      recentSearch: {
+        label : "Recent Searches",
+        icon : "search",
+        eventName : "Recent search clicked",
+        count: 20
+      },
+      topLeftToolbar:[
+      {
+        "title": "1800-958-1000",
+        "icon":  "communication:phone",
+        "url": "tel:18009581000"
+      },
+      {
+        "title": "enquiry@travelnxt.com",
+        "icon": "mail",
+        "url": "mailto:enquiry@travelnxt.com"
+      }
+      ],
+      logo : "http://www.tavisca.com/wp-content/uploads/travelnxt.png",
+    };
+
+    var user= {
+      "isLoggedIn": true,
+      "preLogin": {
+        "title": "Sign Up / Sign In",
+        "icon": "account-circle",
+        "url": "/register"
+      },
+      "postLogin": {
+        "title": "John Doe",
+        "icon": "account-circle"
+      }
+    };
+
+    headerWithoutTopEndMenu = fixture('headerWithoutTopEndMenu');
+    headerWithoutTopEndMenu.data = data;
+    headerWithoutTopEndMenu.user = user;
+  }
+
+  function setupHeaderWithoutRecentSearch(){
+    var data = {
+      primaryMenu :{
+        selectedIndex:0,
+        items: [
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          url : '/test'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          url : '/hotel'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        }
+        ]
+      },
+      mainToolbar :[
+      {
+        label : "Trip Cart",
+        icon : "shopping-cart",
+        eventName : "trip-cart-link-clicked",
+        count: 20
+      }
+      ],
+      topLeftToolbar:[
+      {
+        "title": "1800-958-1000",
+        "icon":  "communication:phone",
+        "url": "tel:18009581000"
+      },
+      {
+        "title": "enquiry@travelnxt.com",
+        "icon": "mail",
+        "url": "mailto:enquiry@travelnxt.com"
+      }
+      ],
+      topEndMenu:[
+      {
+        "code": "ctr-sel",
+        "label": "Country",
+        "isIconMenu": true,
+        "selectedItem": "0",
+        "eventName": "country_changed",
+        "options": [
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/af.svg", "title" : "United State(English)", "value" : "en-us" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-in" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-ts" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/fo.svg", "title" : "Test Case 2(English)", "value" : "en-uk" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/cz.svg", "title" : "Test States 1(English)", "value" : "en-js" }
+        ]
+      },
+      {
+        "code": "currency-sel",
+        "isIconMenu": false,
+        "label": "Currency",
+        "selectedItem": "0",
+        "eventName": "currency_changed",
+        "options": [
+        {title:"Australian Dollar", value:"AUD"},
+        { title:"Brazilian Real ",value:"BRL" },
+        { title:"Danish Krone",value:"DKK" },
+        { title:"Czech Koruna",value:"CZK" },
+        { title:"Canadian Dollar",value:"CAD" },
+        { title : "US Dollar", value :"USD" }
+        ]
+      }
+      ],
+      logo : "http://www.tavisca.com/wp-content/uploads/travelnxt.png",
+    };
+
+    var user= {
+      "isLoggedIn": true,
+      "preLogin": {
+        "title": "Sign Up / Sign In",
+        "icon": "account-circle",
+        "url": "/register"
+      },
+      "postLogin": {
+        "title": "John Doe",
+        "icon": "account-circle"
+      }
+    };
+
+    headerWithoutRecentSearch = fixture('headerWithoutRecentSearch');
+    headerWithoutRecentSearch.data = data;
+    headerWithoutRecentSearch.user = user;
+  }
+
+  function setupBasicHeader(){
+    var data = {
+      primaryMenu :{
+        selectedIndex:0,
+        items: [
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          url : '/test'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Flight',
+          icon : 'maps:flight',
+          url : '/hotel'
+        },
+        {
+          label : 'Hotel',
+          icon : 'maps:hotel',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Car',
+          icon : 'maps:directions-car',
+          eventName : 'activity-option-selected'
+        },
+        {
+          label : 'Activity',
+          icon : 'maps:directions-run',
+          eventName : 'activity-option-selected'
+        }
+        ]
+      },
+      mainToolbar :[
+      {
+        label : "Trip Cart",
+        icon : "shopping-cart",
+        eventName : "trip-cart-link-clicked",
+        count: 20
+      }
+      ],
+      recentSearch: {
+        label : "Recent Searches",
+        icon : "search",
+        eventName : "Recent search clicked",
+        count: 20
+      },
+      topBar : {
+        signUp : {
+          label : 'Sign Up',
+          icon : 'icon-url',
+          url:'/register'
+        },
+        signIn : {
+          label : 'Sign In',
+          icon : 'icon-url',
+          url : '/login'
+        },
+        profile :{
+          label : 'Profile',
+          url : '/profile'
+        },
+        mytrips : {
+          label : 'My Trips',
+          url : '/mytrips'
+        },
+        email : "enquiry@travelnxt.com",
+        emailIcon : 'mail',
+        phone : "1800-948-4455",
+        phoneIcon : 'communication:phone'
+      },
+      topLeftToolbar:[
+      {
+        "title": "1800-958-1000",
+        "icon":  "communication:phone",
+        "url": "tel:18009581000"
+      },
+      {
+        "title": "enquiry@travelnxt.com",
+        "icon": "mail",
+        "url": "mailto:enquiry@travelnxt.com"
+      }
+      ],
+      topEndMenu:[
+      {
+        "code": "ctr-sel",
+        "label": "Country",
+        "isIconMenu": true,
+        "selectedItem": "0",
+        "eventName": "country_changed",
+        "options": [
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/af.svg", "title" : "United State(English)", "value" : "en-us" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-in" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/in.svg", "title" : "India(English)", "value" : "en-ts" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/fo.svg", "title" : "Test Case 2(English)", "value" : "en-uk" },
+        {"icon":"https://lipis.github.io/flag-icon-css/flags/4x3/cz.svg", "title" : "Test States 1(English)", "value" : "en-js" }
+        ]
+      },
+      {
+        "code": "currency-sel",
+        "isIconMenu": false,
+        "label": "Currency",
+        "selectedItem": "0",
+        "eventName": "currency_changed",
+        "options": [
+        {title:"Australian Dollar", value:"AUD"},
+        { title:"Brazilian Real ",value:"BRL" },
+        { title:"Danish Krone",value:"DKK" },
+        { title:"Czech Koruna",value:"CZK" },
+        { title:"Canadian Dollar",value:"CAD" },
+        { title : "US Dollar", value :"USD" }
+        ]
+      }
+      ],
+      logo : "http://www.tavisca.com/wp-content/uploads/travelnxt.png",
+    };
+
+    var user= {
+      "isLoggedIn": true,
+      "preLogin": {
+        "title": "Sign Up / Sign In",
+        "icon": "account-circle",
+        "url": "/register"
+      },
+      "postLogin": {
+        "title": "John Doe",
+        "icon": "account-circle"
+      }
+    };
+
+    header = fixture('basic');
+    header.data = data;
+    header.user = user;
+  }
+
+  setup(function(){
+    window.resizeTo(320, 480 );
+    setupBasicHeader();
+    setupHeaderWithoutTopEndMenu();
+    setupHeaderWithoutPrimaryMenu();
+    setupHeaderWithoutSecondaryMenu();
+    setupHeaderWithoutRecentSearch();
+    setupHeaderWithoutTopStartMenu();
+  });
+
+  test('instantiating the element works', function() {
+    assert.equal(header.is, 't-header');
+  });
+
+  test('should not display primary menu if its not provided', function() {
+    assert.equal(headerWithoutPrimaryMenu.querySelector('.tabs'), null);
+  });
+
+  test('should not display secondary menu if its not provided', function() {
+    assert.equal(headerWithoutSecondaryMenu.querySelector('#mainToolbar').hidden, true);
+  });
+
+  test('should not display top end menu if its not provided', function() {
+    assert.equal(headerWithoutTopEndMenu.querySelector('#topEndMenu'), null);
+  });
+
+  test('should not display recent search if its not provided', function() {
+    assert.equal(headerWithoutRecentSearch.querySelector('#recentSearch').hidden, true);
+  });
+
+  test('should not display top start menu if its not provided', function() {
+    assert.equal(headerWithoutTopStartMenu.querySelector('#topLeftToolbar').hidden, true);
+  });
+
+  test('should fire event when tab is changed', function(){
+    assert.equal(headerWithoutTopStartMenu.querySelector('#topLeftToolbar').hidden, true);
+  });
+
+  test('should fire event when main toolbar is tapped', function(done){
+    flush(function(){
+      header.addEventListener('t-header-main-toolbar-tapped', function(e){
+        assert.equal(e.detail.count, 20);
+        done();
+      })
+      var mainToolbar = header.querySelector('.main-toolbar');
+      mainToolbar.click();
+    });
+  })
+
+  test('should fire event when dropdown selection is changed', function(done){
+    var calledAlready = false;
+      header.addEventListener('country_changed', function(e){
+        assert.equal(e.detail.value, header.data.topEndMenu[0].options[0].value);
+        if(!calledAlready)
+          done();
+        calledAlready = true;
+      })
+  });
+
+  test('should show icon dropdown if isIconMenu is set as true', function(){
+    flush(function(){
+      var menu = header.querySelector('.top-end-menu');
+      assert.equal(menu.classList.contains('small'), false);
+    });
+  });
+
+  test('should show normal dropdown if isIconMenu is set as false', function(){
+    flush(function(){
+      var menu = header.querySelectorAll('.top-end-menu')[1];
+      assert.equal(menu.classList.contains('small'), true);
+    });
+  });
+
+  test('getState should return current state of the component', function(){
+    flush(function(){
+      var state = header.getState();
+      assert.deepEqual(state.data, header.data);
+    });
+  });
+
+  test('should fire recent-search tapped event on tapping', function(done){
+    flush(function(){
+      header.addEventListener('t-header-recentsearch-tapped', function(e){
+        assert.equal(true, true);
+        done();
+      })
+      var recentSearch = header.querySelector('.recent-search');
+      recentSearch.click();
+    });
+  });
+
+  test('should set isLoggedIn to false on t-header-logout event', function(done){
+    headerWithoutRecentSearch.fire('t-header-logout');
+    setTimeout(function(){
+      debugger;
+      assert.equal(headerWithoutRecentSearch.user.isLoggedIn, false);
+      done();
+    });
+  });
+
+  test('should set isLoggedIn to true on t-header-login event', function(done){
+    header.fire('t-header-login',{name: 'John Doe'});
+    flush(function(){
+      assert.equal(header.user.isLoggedIn, true);
+      assert.equal(header.user.postLogin.title, 'John Doe');
+      done();
+    });
+  });
+
+
+  test('should change primary menu selection on t-header-item-select event ', function(done){
+    header.fire('t-header-item-select',2);
+    flush(function(){
+      assert.equal(header.data.primaryMenu.selectedIndex, 2);
+      done();
+    });
+  });
+
+})
+    </script>
+  </body>
+</html>

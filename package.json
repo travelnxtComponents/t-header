@@ -1,0 +1,30 @@
+{
+  "name": "t-header",
+  "version": "1.0.0",
+  "description": "Header component",
+  "main": "wct.conf.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "web-component-tester": "^6.0.0-prerelease.4",
+    "web-component-tester-istanbul": "^0.10.1-wct6.10"
+  },
+  "devDependencies": {
+    "web-component-tester": "git+https://github.com/t2ym/web-component-tester.git#wct6-plugin",
+    "web-component-tester-istanbul": "git+https://github.com/t2ym/web-component-tester-istanbul.git#0.10.1-wct6.10"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shailesh17mar/t-header.git"
+  },
+  "author": "shailesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shailesh17mar/t-header/issues"
+  },
+  "homepage": "https://github.com/shailesh17mar/t-header#readme"
+}
