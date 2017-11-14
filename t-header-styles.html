@@ -2,7 +2,7 @@
   <template>
     <style>
        :root {
-        end-justified --paper-font-common-base: {
+        --paper-font-common-base: {
           font-family: "Roboto";
         }
         ;
@@ -54,11 +54,6 @@
 
       app-toolbar {
         padding: 0;
-      }
-
-      .user-section-content {
-        /* max-width: 400px; */
-        /* max-height: 400px; */
       }
 
       .flag {
@@ -197,8 +192,6 @@
         /* line-height: 60px; */
       }
 
-      .right-text {}
-
       .tabs {
         height: 100%;
         margin: 30px;
@@ -302,17 +295,16 @@
           z-index: 3;
         }
 
-
+        .item {
+          margin-right: 10px;
+          padding-top: 4px;
+        }
 
         #drawer[selected="drawer"] {
           z-index: 4;
         }
 
         app-header {
-          z-index: 2;
-        }
-
-        .topbar {
           z-index: 2;
         }
 
@@ -332,11 +324,13 @@
 
         .icon {
           margin: 0;
-          margin-right: 10px;
+          width: 15px;
+          height: 15px;
         }
 
         .topbar {
-          padding: 0 16px;
+          z-index: 2;
+          padding: 0 5px;
         }
 
         .dropdown {
