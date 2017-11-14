@@ -31,7 +31,11 @@
       }
 
       paper-item {
-        font-size: 14px;
+        --paper-item: {
+          font-size: 14px;
+          min-height: 40px;
+        }
+        ;
       }
 
       :host {
@@ -105,10 +109,6 @@
         width: 50px;
       }
 
-      .right-topbar>div {
-        /* margin-right: 20px; */
-      }
-
       .signup-section {
         margin-right: 0 !important;
       }
@@ -160,6 +160,7 @@
 
       .drawer {
         overflow-y: auto;
+        height: 100%;
       }
 
       .drawer-search {
@@ -322,7 +323,7 @@
           vertical-align: middle;
         }
 
-        .icon {
+        .topbar-left .icon {
           margin: 0;
           width: 15px;
           height: 15px;
