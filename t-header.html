@@ -165,7 +165,7 @@
         </div>
 
         <template is="dom-if" if="[[_containsMoreThanZeroItems(data.primaryMenu)]]">
-          <div class="flex tabs" >
+          <div class="flex tabs" hidden$="[[_isMobile]]">
             <paper-tabs noink hidden$="[[_isMobile]]" class="flex primary-menu" scrollable selected="{{data.primaryMenu.selectedIndex}}" on-iron-select="_tabChanged">
               <template is="dom-repeat" items="[[data.primaryMenu.items]]">
                 <paper-tab><iron-icon class="icon" icon="[[item.icon]]"></iron-icon>[[item.label]]</paper-tab>
@@ -427,7 +427,7 @@ Polymer({
 
   _getSecondaryMenuFlexRatio: function(value){
     if(this._containsMoreThanZeroItems(this.data.primaryMenu)){
-      return "flex-2 end-justified horizontal layout secondary-menu";
+      return "flex end-justified horizontal layout secondary-menu";
     }
     return "flex end-justified horizontal layout secondary-menu";
   },
