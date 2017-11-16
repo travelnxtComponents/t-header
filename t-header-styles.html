@@ -26,7 +26,8 @@
       }
       .content-wrapper {
         max-width: var(--t-header-content-max-width, 1280px);
-        margin: 0 auto;    
+        margin: 0 auto;
+        padding: 0 5px;    
       }
       paper-button {
         font-weight: normal !important;
@@ -145,7 +146,6 @@
         color: var(--t-header-color, #a9afdf);
         height: 48px;
         line-height: 48px;
-        padding: 0 24px;
       }
 
       .item {
@@ -153,13 +153,11 @@
       }
 
       .secondary-menu {
-        /* position: absolute; */
         float: right;
-        /* right: 0; */
       }
 
       .notification-count {
-        @apply(--t-header-notification-bubble)
+        @apply --t-header-notification-bubble;
       }
 
       .drawer {

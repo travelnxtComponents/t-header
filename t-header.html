@@ -76,13 +76,13 @@
           </paper-button>
 
           <template is="dom-if" if="[[_containsMoreThanZeroItems(data.topEndMenu)]]">
-            <div class="layout horizontal top-end-menu " id="topEndMenu" hidden$="[[_isMobile]]">
+            <div class="layout horizontal center top-end-menu" id="topEndMenu" hidden$="[[_isMobile]]">
               <template is="dom-repeat" items="[[data.topEndMenu]]">
                 <div hidden$="[[!item.isIconMenu]]">
-                  <iron-icon hidden$="[[_notDesktop]]" class="flag" src="[[_getCurrentIcon(item.options, item.selectedItem)]]"></iron-icon>
+                  <iron-icon hidden$="[[_isMobile]]" class="flag" src="[[_getCurrentIcon(item.options, item.selectedItem)]]"></iron-icon>
                 </div>
                 <div>
-                  <paper-dropdown-menu data-option="[[data.topEndMenu]]" hidden$="[[_hideIfResponsiveScreenAndIconMenu(_notDesktop, item.isIconMenu)]]" no-label-float class$="top-end-menu [[_getDropdownClasses(item.isIconMenu)]]"
+                  <paper-dropdown-menu dynamic-align data-item="[[data.topEndMenu]]" hidden$="[[_hideIfResponsiveScreenAndIconMenu(_isMobile, item.isIconMenu)]]" no-label-float class$="top-end-menu [[_getDropdownClasses(item.isIconMenu)]]"
                     on-iron-select="_topEndMenuChanged">
                     <paper-listbox slot="dropdown-content" class="dropdown-content" selected="{{ item.selectedItem }}">
                       <template is="dom-repeat" items="[[item.options]]" as="option">
@@ -112,13 +112,14 @@
                       </template>
                     </paper-menu>
                   </paper-menu-button>
-                  <iron-icon hidden$="[[!_isTablet]]" icon="paper-dropdown-menu:arrow-drop-down" suffix="" class="dropdown style-scope paper-dropdown-menu x-scope iron-icon-0">
+                  <!-- DETECT -->
+                  <!-- <iron-icon hidden$="[[!_isTablet]]" icon="paper-dropdown-menu:arrow-drop-down" suffix="" class="dropdown style-scope paper-dropdown-menu x-scope iron-icon-0">
                     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
                       <g class="style-scope iron-icon">
                         <path d="M7 10l5 5 5-5z" class="style-scope iron-icon"></path>
                       </g>
                     </svg>
-                  </iron-icon>
+                  </iron-icon> -->
                 </div>
               </template>
 
