@@ -1,4 +1,3 @@
-
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../app-layout/app-header/app-header.html">
 <link rel="import" href="../app-layout/app-toolbar/app-toolbar.html">
@@ -6,7 +5,7 @@
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-tabs/paper-tabs.html">
 <link rel="import" href="../paper-tabs/paper-tab.html">
- <link rel="import" href="../neon-animation/web-animations.html">
+<link rel="import" href="../neon-animation/web-animations.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
 <link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
@@ -54,129 +53,147 @@
     <iron-media-query query="(max-width: 1024px) and (min-width: 768px)" query-matches="{{_isTablet}}"></iron-media-query>
     <iron-media-query query="(min-width : 320px) and (max-width : 767px)" query-matches="{{_isMobile}}"></iron-media-query>
 
-    <div class="layout horizontal topbar end-justified">
-      <div id="topLeftToolbar" hidden$="[[_hideIfNullOrEmpty(data.topLeftToolbar)]]" class="flex layout horizontal topbar-left">
-        <template is="dom-repeat" items="[[_getTopStartMenu(_isMobile,data.topLeftToolbar)]]">
-          <div class="item">
-            <iron-icon class="icon" icon="[[item.icon]]"></iron-icon>
-            <a href$="[[item.url]]" >[[item.title]]</a>
-          </div>
-        </template>
-      </div>
-
-      <div class="layout horizontal right-topbar end-justified" id="recentSearch" hidden$="[[!data.recentSearch]]">
-        <paper-button class="recent-search right-item layout horizontal" hidden$="[[ _isMobile ]]" data-event="[[data.recentSearch.eventName]]" on-tap="_recentSearchTapped"  >
-          <div class="button-icon" >
-            <iron-icon class="icon" icon="[[data.recentSearch.icon]]"></iron-icon>
-            <div hidden$="[[_hideCount(data.recentSearch.count)]]" class="notification-count recent-search-count">[[data.recentSearch.count]]</div>
-          </div>
-          <div class="right-text" hidden$="[[_notDesktop]]">[[data.recentSearch.label]]</div>
-        </paper-button>
-
-        <template is="dom-if" if="[[_containsMoreThanZeroItems(data.topEndMenu)]]">
-          <div class="layout horizontal top-end-menu " id="topEndMenu" hidden$="[[_isMobile]]">
-            <template is="dom-repeat" items="[[data.topEndMenu]]">
-              <div hidden$="[[!item.isIconMenu]]">
-                <iron-icon hidden$="[[_notDesktop]]" class="flag" src="[[_getCurrentIcon(item.options, item.selectedItem)]]"></iron-icon></div>
-              <div>
-                <paper-dropdown-menu  hidden$="[[_hideIfResponsiveScreenAndIconMenu(_notDesktop, item.isIconMenu)]]" no-label-float class$="top-end-menu [[_getDropdownClasses(item.isIconMenu)]]" on-iron-select="_topEndMenuChanged" >
-                  <paper-listbox slot="dropdown-content"  class="dropdown-content"  selected="{{ item.selectedItem }}">
-                    <template is="dom-repeat" items="[[item.options]]" as="option">
-                      <template is="dom-if" if="[[item.isIconMenu]]">
-                        <paper-item data-icon$="[[option.icon]]" data-label$="[[option.value]]">
-                          <iron-icon hidden$="[[!item.isIconMenu]]" class="icon" src="[[option.icon]]"></iron-icon>
-                  [[option.title]]
-                        </paper-item>
-                      </template>
-                      <template is="dom-if" if="[[!item.isIconMenu]]">
-                        <paper-item  label="[[option.value]]" data-value$="[[option.value]]" >
-                          [[_getDropdownLabel(option.value, option.title)]]
-                        </paper-item>
-                      </template>
-                    </template>
-                  </paper-listbox>
-                </paper-dropdown-menu>
-              </div>
-
-              <div hidden$="[[!item.isIconMenu]]">
-                <paper-menu-button dynamic-align  hidden$="[[!_notDesktop]]" class="dropdown icon-menu" data-index$="[[index]]" on-iron-select="_topEndMenuChanged">
-                  <paper-icon-button src="[[_getCurrentIcon(item.options, item.selectedItem)]]" class="dropdown-trigger"></paper-icon-button>
-                  <paper-menu class="dropdown-content">
-                    <template is="dom-repeat" items="[[item.options]]">
-                      <paper-item data-icon$="[[item.icon]]" data-label$="[[item.value]]"><iron-icon class="icon" src="[[item.icon]]"></iron-icon>[[item.title]]</paper-item>
-                    </template>
-                  </paper-menu>
-                </paper-menu-button >
-                <iron-icon hidden$="[[!_isTablet]]" icon="paper-dropdown-menu:arrow-drop-down" suffix="" class="dropdown style-scope paper-dropdown-menu x-scope iron-icon-0"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g class="style-scope iron-icon"><path d="M7 10l5 5 5-5z" class="style-scope iron-icon"></path></g></svg> </iron-icon>
-              </div>
-            </template>
-
-          </div>
-        </template>
-        <div hidden$="[[!user]]" class="signup-section" >
-          <div id="userSection" hidden$="[[!user.isLoggedIn]]">
-            <div hidden$="[[!_hasUrlTrigger(user.postLogin)]]">
-              <paper-button icon="[[user.postLogin.icon]]" class="action-button" on-tap="_userSectionTapped">
-                <iron-icon icon="[[user.postLogin.icon]]" class="icon"></iron-icon>
-          [[user.postLogin.title]]
-              </paper-button>
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="content-wrapper layout horizontal end-justified">
+        <div id="topLeftToolbar" hidden$="[[_hideIfNullOrEmpty(data.topLeftToolbar)]]" class="flex layout horizontal topbar-left">
+          <template is="dom-repeat" items="[[_getTopStartMenu(_isMobile,data.topLeftToolbar)]]">
+            <div class="item">
+              <iron-icon class="icon" icon="[[item.icon]]"></iron-icon>
+              <a href$="[[item.url]]">[[item.title]]</a>
             </div>
-            <div hidden$="[[_hasUrlTrigger(user.postLogin)]]">
-              <paper-menu-button dynamic-align >
-                <paper-button icon="[[user.preLogin.icon]]" class="dropdown-trigger action-button" >
-                  <iron-icon icon="[[user.preLogin.icon]]" class="icon"></iron-icon>
+          </template>
+        </div>
+
+        <div class="layout horizontal right-topbar end-justified" id="recentSearch" hidden$="[[!data.recentSearch]]">
+          <paper-button class="recent-search right-item layout horizontal" hidden$="[[ _isMobile ]]" data-event="[[data.recentSearch.eventName]]"
+            on-tap="_recentSearchTapped">
+            <div class="button-icon">
+              <iron-icon class="icon" icon="[[data.recentSearch.icon]]"></iron-icon>
+              <div hidden$="[[_hideCount(data.recentSearch.count)]]" class="notification-count recent-search-count">[[data.recentSearch.count]]</div>
+            </div>
+            <div class="right-text" hidden$="[[_notDesktop]]">[[data.recentSearch.label]]</div>
+          </paper-button>
+
+          <template is="dom-if" if="[[_containsMoreThanZeroItems(data.topEndMenu)]]">
+            <div class="layout horizontal top-end-menu " id="topEndMenu" hidden$="[[_isMobile]]">
+              <template is="dom-repeat" items="[[data.topEndMenu]]">
+                <div hidden$="[[!item.isIconMenu]]">
+                  <iron-icon hidden$="[[_notDesktop]]" class="flag" src="[[_getCurrentIcon(item.options, item.selectedItem)]]"></iron-icon>
+                </div>
+                <div>
+                  <paper-dropdown-menu data-option="[[data.topEndMenu]]" hidden$="[[_hideIfResponsiveScreenAndIconMenu(_notDesktop, item.isIconMenu)]]" no-label-float class$="top-end-menu [[_getDropdownClasses(item.isIconMenu)]]"
+                    on-iron-select="_topEndMenuChanged">
+                    <paper-listbox slot="dropdown-content" class="dropdown-content" selected="{{ item.selectedItem }}">
+                      <template is="dom-repeat" items="[[item.options]]" as="option">
+                        <template is="dom-if" if="[[item.isIconMenu]]">
+                          <paper-item data-icon$="[[option.icon]]" data-label$="[[option.value]]">
+                            <iron-icon hidden$="[[!item.isIconMenu]]" class="icon" src="[[option.icon]]"></iron-icon>
+                            [[option.title]]
+                          </paper-item>
+                        </template>
+                        <template is="dom-if" if="[[!item.isIconMenu]]">
+                          <paper-item label="[[option.value]]" data-value$="[[option.value]]">
+                            [[_getDropdownLabel(option.value, option.title)]]
+                          </paper-item>
+                        </template>
+                      </template>
+                    </paper-listbox>
+                  </paper-dropdown-menu>
+                </div>
+
+                <div hidden$="[[!item.isIconMenu]]">
+                  <paper-menu-button dynamic-align hidden$="[[!_notDesktop]]" class="dropdown icon-menu" data-index$="[[index]]" on-iron-select="_topEndMenuChanged">
+                    <paper-icon-button src="[[_getCurrentIcon(item.options, item.selectedItem)]]" class="dropdown-trigger"></paper-icon-button>
+                    <paper-menu class="dropdown-content">
+                      <template is="dom-repeat" items="[[item.options]]">
+                        <paper-item data-icon$="[[item.icon]]" data-label$="[[item.value]]">
+                          <iron-icon class="icon" src="[[item.icon]]"></iron-icon>[[item.title]]</paper-item>
+                      </template>
+                    </paper-menu>
+                  </paper-menu-button>
+                  <iron-icon hidden$="[[!_isTablet]]" icon="paper-dropdown-menu:arrow-drop-down" suffix="" class="dropdown style-scope paper-dropdown-menu x-scope iron-icon-0">
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                      <g class="style-scope iron-icon">
+                        <path d="M7 10l5 5 5-5z" class="style-scope iron-icon"></path>
+                      </g>
+                    </svg>
+                  </iron-icon>
+                </div>
+              </template>
+
+            </div>
+          </template>
+          <div hidden$="[[!user]]" class="signup-section">
+            <div id="userSection" hidden$="[[!user.isLoggedIn]]">
+              <div hidden$="[[!_hasUrlTrigger(user.postLogin)]]">
+                <paper-button icon="[[user.postLogin.icon]]" class="action-button" on-tap="_userSectionTapped">
+                  <iron-icon icon="[[user.postLogin.icon]]" class="icon"></iron-icon>
                   [[user.postLogin.title]]
                 </paper-button>
-                <div class="dropdown-content user-section-content">
-                  <content select=".prelogin-content" ></content>
-                </div>
-              </paper-menu-button>
+              </div>
+              <div hidden$="[[_hasUrlTrigger(user.postLogin)]]">
+                <paper-menu-button dynamic-align>
+                  <paper-button icon="[[user.preLogin.icon]]" class="dropdown-trigger action-button">
+                    <iron-icon icon="[[user.preLogin.icon]]" class="icon"></iron-icon>
+                    [[user.postLogin.title]]
+                  </paper-button>
+                  <div class="dropdown-content user-section-content">
+                    <content select=".prelogin-content"></content>
+                  </div>
+                </paper-menu-button>
+              </div>
             </div>
-          </div>
-          <div id="anonymousSection" hidden$="[[user.isLoggedIn]]">
-            <div hidden$="[[!_hasUrlTrigger(user.preLogin)]]">
-              <paper-button icon="[[user.preLogin.icon]]" class="action-button" on-tap="_userSectionTapped">
-                <iron-icon icon="[[user.preLogin.icon]]" class="icon"></iron-icon>
-                [[user.preLogin.title]]
-              </paper-button>
-            </div>
-            <div hidden$="[[_hasUrlTrigger(user.preLogin)]]">
-              <paper-menu-button >
-                <paper-button icon="[[user.preLogin.icon]]" class="dropdown-trigger action-button" >
+            <div id="anonymousSection" hidden$="[[user.isLoggedIn]]">
+              <div hidden$="[[!_hasUrlTrigger(user.preLogin)]]">
+                <paper-button icon="[[user.preLogin.icon]]" class="action-button" on-tap="_userSectionTapped">
                   <iron-icon icon="[[user.preLogin.icon]]" class="icon"></iron-icon>
                   [[user.preLogin.title]]
                 </paper-button>
-                <content select=".prelogin-content" class="dropdown-content" ></content>
-              </paper-menu-button>
+              </div>
+              <div hidden$="[[_hasUrlTrigger(user.preLogin)]]">
+                <paper-menu-button>
+                  <paper-button icon="[[user.preLogin.icon]]" class="dropdown-trigger action-button">
+                    <iron-icon icon="[[user.preLogin.icon]]" class="icon"></iron-icon>
+                    [[user.preLogin.title]]
+                  </paper-button>
+                  <content select=".prelogin-content" class="dropdown-content"></content>
+                </paper-menu-button>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
+
+    <!-- HEADER WITH LOGO -->
     <app-header class="flex paper-header-panel" disabled>
-      <app-toolbar class="menu-content" >
+        <div class="content-wrapper">
+      <app-toolbar class="menu-content">
         <div>
           <iron-icon class="icon" icon="icons:menu" on-tap="_openDrawer" hidden$="[[!_isMobile]]"></iron-icon>
-          
-          <paper-button class="logo"  on-tap="_logoTapped">
+
+          <paper-button class="logo" on-tap="_logoTapped">
             <img class="logo" src="[[data.logo.imageUrl]]" />
           </paper-button>
         </div>
 
         <template is="dom-if" if="[[_containsMoreThanZeroItems(data.primaryMenu)]]">
           <div class="flex tabs" hidden$="[[_isMobile]]">
-            <paper-tabs noink hidden$="[[_isMobile]]" class="flex primary-menu" scrollable selected="{{data.primaryMenu.selectedIndex}}" on-iron-select="_tabChanged">
+            <paper-tabs noink hidden$="[[_isMobile]]" class="flex primary-menu" scrollable selected="{{data.primaryMenu.selectedIndex}}"
+              on-iron-select="_tabChanged">
               <template is="dom-repeat" items="[[data.primaryMenu.items]]">
-                <paper-tab><iron-icon class="icon" icon="[[item.icon]]"></iron-icon>[[item.label]]</paper-tab>
+                <paper-tab>
+                  <iron-icon class="icon" icon="[[item.icon]]"></iron-icon>[[item.label]]</paper-tab>
               </template>
             </paper-tabs>
           </div>
         </template>
         <div class$="[[_getSecondaryMenuFlexRatio(data.mainToolbar)]]" id="mainToolbar" hidden$="[[_hideIfNullOrEmpty(data.mainToolbar)]]">
           <template is="dom-repeat" items="[[data.mainToolbar]]">
-            <paper-button class="end-justified secondary-menu main-toolbar horizontal layout" data-event="[[item.eventName]]" on-tap="_mainToolbarItemsTapped" >
-              <div class="button-icon" >
+            <paper-button class="end-justified secondary-menu main-toolbar horizontal layout" data-event="[[item.eventName]]" on-tap="_mainToolbarItemsTapped">
+              <div class="button-icon">
                 <iron-icon icon="[[item.icon]]" class="icon"></iron-icon>
                 <div hidden$="[[_hideCount(item.count)]]" class="notification-count">[[item.count]]</div>
               </div>
@@ -186,13 +203,16 @@
 
         </div>
       </app-toolbar>
+    </div>
     </app-header>
 
+    <!-- DRAWER FOR MOBILE -->
     <app-drawer disable-edge-swipe id="drawer" hidden$="[[!_isMobile]]" drawer>
       <div drawer class="drawer">
-        <iron-selector selected="{{data.primaryMenu.selectedIndex}}"  on-iron-select="_primaryMenuChanged">
+        <iron-selector selected="{{data.primaryMenu.selectedIndex}}" on-iron-select="_primaryMenuChanged">
           <template is="dom-repeat" items="[[data.primaryMenu.items]]">
-            <paper-item class="drawer-item"><iron-icon class="icon" icon="[[item.icon]]"></iron-icon>[[item.label]]</paper-item>
+            <paper-item class="drawer-item">
+              <iron-icon class="icon" icon="[[item.icon]]"></iron-icon>[[item.label]]</paper-item>
           </template>
         </iron-selector>
 
@@ -205,10 +225,10 @@
             <div class="flex">[[item.label]]</div>
             <div class="end end-justified">
               <template is="dom-if" if="[[!item.isIconMenu]]">
-                <paper-dropdown-menu  dynamic-align on-iron-select="_topEndMenuChanged" no-label-float class$="[[ _getDropdownClasses(item.isIconMenu)]]">
+                <paper-dropdown-menu dynamic-align on-iron-select="_topEndMenuChanged" no-label-float class$="[[ _getDropdownClasses(item.isIconMenu)]]">
                   <paper-listbox slot="dropdown-content" class="dropdown-content" selected="{{ item.selectedItem }}">
                     <template is="dom-repeat" items="[[item.options]]" as="option" selected-item-label="label">
-                      <paper-item label="[[option.value]]" data-label$="[[option.value]]" >[[_getDropdownLabel(option.value, option.title)]]
+                      <paper-item label="[[option.value]]" data-label$="[[option.value]]">[[_getDropdownLabel(option.value, option.title)]]
                       </paper-item>
                     </template>
                   </paper-listbox>
@@ -216,226 +236,234 @@
               </template>
             </div>
             <template is="dom-if" if="[[item.isIconMenu]]">
-              <paper-menu-button dynamic-align  class="icon-menu" on-iron-select="_topEndMenuChanged">
+              <paper-menu-button dynamic-align class="icon-menu" on-iron-select="_topEndMenuChanged">
                 <paper-icon-button src="[[_getCurrentIcon(item.options, item.selectedItem)]]" class="dropdown-trigger"></paper-icon-button>
                 <paper-menu dynamic-align class="dropdown-content" selected="{{item.selectedItem}}">
                   <template is="dom-repeat" items="[[item.options]]" as="option">
-                    <paper-item data-icon$="[[option.icon]]" data-label$="[[option.value]]"><iron-icon class="icon" src="[[option.icon]]"></iron-icon>[[option.title]]</paper-item>
+                    <paper-item data-icon$="[[option.icon]]" data-label$="[[option.value]]">
+                      <iron-icon class="icon" src="[[option.icon]]"></iron-icon>[[option.title]]</paper-item>
                   </template>
                 </paper-menu>
-              </paper-menu-button >
-              <iron-icon icon="paper-dropdown-menu:arrow-drop-down" suffix="" class="style-scope paper-dropdown-menu x-scope iron-icon-0"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g class="style-scope iron-icon"><path d="M7 10l5 5 5-5z" class="style-scope iron-icon"></path></g></svg> </iron-icon>
+              </paper-menu-button>
+              <iron-icon icon="paper-dropdown-menu:arrow-drop-down" suffix="" class="style-scope paper-dropdown-menu x-scope iron-icon-0">
+                <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                  <g class="style-scope iron-icon">
+                    <path d="M7 10l5 5 5-5z" class="style-scope iron-icon"></path>
+                  </g>
+                </svg>
+              </iron-icon>
             </template>
           </paper-item>
         </template>
 
       </div>
     </app-drawer>
+
   </template>
 
   <script>
-Polymer({
-  is: 't-header',
+    Polymer({
+      is: 't-header',
 
-  listeners:{
-    't-header-login': '_onLogin',
-    't-header-logout': '_onLogout',
-    't-header-item-select': '_primaryMenuChanged',
-  },
+      listeners: {
+        't-header-login': '_onLogin',
+        't-header-logout': '_onLogout',
+        't-header-item-select': '_primaryMenuChanged',
+      },
 
-  properties: {
-    /**
-     * Fired when primary menu selection is changed
-     *
-     * @event t-header-primary-item-selected
-     * @param {Object} item Currently selected primary menu item
-     */
+      properties: {
+        /**
+         * Fired when primary menu selection is changed
+         *
+         * @event t-header-primary-item-selected
+         * @param {Object} item Currently selected primary menu item
+         */
 
-    /**
-     * Fired when secondary menu selection is changed
-     *
-     * @event t-header-secondary-item-selected
-     * @param {Object} item Currently selected secondary menu item
-     */
-    /**
-     * Describes all menus and sections present in the header
-     *
-     * @type {{primaryMenu: Object, mainToolbar: Array<Object>, recentSearch: Object, topLeftToolbar: Array<Object>, topEndMenu: Array<Object>, logo: String}}
-     */
-    data: {
-      type: Object,
-      notify: true,
-      required:true
-    },
-    /**
-     * Describes User section present on the top right corner
-     *
-     * @type {{isLoggedIn: Boolean, preLogin: Object, postLogin: Object }}
-     */
-    user: {
-      type: Object,
-      notify:true
-    },
-    /** returns true if the device is mobile*/
-    _isMobile:{
-      type:Boolean
-    },
-    /** returns true if the device is tablet*/
-    _isTablet:{
-      type:Boolean
-    },
-    /** returns true if the device is either mobile or tablet*/
-    _notDesktop: {
-      type: Boolean,
-      computed: '_isSmallScreen(_isTablet, _isMobile)'
-    }
-  },
+        /**
+         * Fired when secondary menu selection is changed
+         *
+         * @event t-header-secondary-item-selected
+         * @param {Object} item Currently selected secondary menu item
+         */
+        /**
+         * Describes all menus and sections present in the header
+         *
+         * @type {{primaryMenu: Object, mainToolbar: Array<Object>, recentSearch: Object, topLeftToolbar: Array<Object>, topEndMenu: Array<Object>, logo: String}}
+         */
+        data: {
+          type: Object,
+          notify: true,
+          required: true
+        },
+        /**
+         * Describes User section present on the top right corner
+         *
+         * @type {{isLoggedIn: Boolean, preLogin: Object, postLogin: Object }}
+         */
+        user: {
+          type: Object,
+          notify: true
+        },
+        /** returns true if the device is mobile*/
+        _isMobile: {
+          type: Boolean
+        },
+        /** returns true if the device is tablet*/
+        _isTablet: {
+          type: Boolean
+        },
+        /** returns true if the device is either mobile or tablet*/
+        _notDesktop: {
+          type: Boolean,
+          computed: '_isSmallScreen(_isTablet, _isMobile)'
+        }
+      },
 
-  /**
-   * Returns currentState of the component
-   *
-   * @return {Object} Object contains data & user attributes
-   */
-  getState: function(){
-    return {
-      data: this.data,
-      user: this.user
-    }
-  },
+      /**
+       * Returns currentState of the component
+       *
+       * @return {Object} Object contains data & user attributes
+       */
+      getState: function () {
+        return {
+          data: this.data,
+          user: this.user
+        }
+      },
 
-  _topEndMenuChanged: function(e){
-    var selectedDropdown =  e.model.item;
-    var selectedPaperItem =  e.detail.item;
-    var selectedItem = null;
-    selectedDropdown.options.forEach(function(item){
-      if(item.value === selectedPaperItem.getAttribute('data-label')){
-        selectedItem = item;
-        return;
+      _topEndMenuChanged: function (e) {
+        var selectedDropdown = e.model.item;
+        var selectedPaperItem = e.detail.item;
+        var selectedItem = null;
+        selectedDropdown.options.forEach(function (item) {
+          if (item.value === selectedPaperItem.getAttribute('data-label')) {
+            selectedItem = item;
+            return;
+          }
+        });
+        if (selectedItem) {
+          if (selectedDropdown.isIconMenu)
+            this._selectedFlag = selectedItem.icon;
+          this.fire(selectedDropdown.eventName, selectedItem);
+        }
+      },
+
+      _onLogin: function (e, detail) {
+        this.user.postLogin.title = detail.name;
+        this.set('user.isLoggedIn', true);
+      },
+
+      _onLogout: function (e, detail) {
+        this.set('user.isLoggedIn', false);
+      },
+
+      _primaryMenuChanged: function (e, detail) {
+        if (typeof (detail) === 'number')
+          this.set('data.primaryMenu.selectedIndex', detail);
+        else {
+          this._tabChanged(null, e.target.selected);
+          this.$.drawer.close();
+        }
+      },
+
+      _tabChanged: function (e, index) {
+        const header = this;
+        const selectedTab = this.data.primaryMenu.items.filter(function (item, index) {
+          return (index === header.data.primaryMenu.selectedIndex);
+        });
+        if (selectedTab.length > 0) {
+          this.fire('t-header-primary-item-selected', selectedTab[0]);
+          if (selectedTab[0].url) {
+            window.location = selectedTab[0].url;
+            e.stopPropagation();
+          }
+        }
+      },
+
+      _hideCount: function (count) {
+        return !count || count === 0;
+      },
+
+      _isSmallScreen: function (isTablet, isMobile) {
+        return isTablet || isMobile;
+      },
+
+      _recentSearchTapped: function (e) {
+        this.fire('t-header-recentsearch-tapped');
+      },
+
+      _mainToolbarItemsTapped: function (e) {
+        this.fire('t-header-main-toolbar-tapped', e.model.item);
+        this.$.drawer.close();
+      },
+
+      _openDrawer: function (e) {
+        this.$.drawer.open();
+      },
+
+      _getDropdownLabel: function (title, value) {
+        return title + ' ' + value;
+      },
+
+      _userSectionTapped: function (e) {
+        if (this.user.isLoggedIn) {
+          if (this.postLogin.url)
+            window.location = this.postLogin.url;
+        }
+      },
+
+      _hasUrlTrigger: function (item) {
+        return (item && item.url !== undefined && item !== null && item.length > 0);
+      },
+
+      _getDropdownClasses: function (isIconMenu) {
+        if (isIconMenu)
+          return "dropdown";
+        return "small dropdown";
+      },
+
+      _hideIfResponsiveScreenAndIconMenu: function (notDesktop, isIconMenu) {
+        return notDesktop && isIconMenu;
+      },
+
+      _getTopStartMenu: function (isMobile, items) {
+        if (isMobile) {
+          var array = [];
+          array.push(items[0]);
+          return array;
+        }
+        return items;
+      },
+
+      _hideIfNullOrEmpty: function (items) {
+        return (!items || items.length === 0);
+      },
+
+      _getCurrentIcon: function (options, item) {
+        return options[parseInt(item)].icon;
+      },
+
+      _containsMoreThanZeroItems: function (menu) {
+        if (menu) {
+          if (Array.isArray(menu))
+            return menu.length > 0;
+          else
+            return menu.items && menu.items.length > 0;
+        }
+        return false;
+      },
+
+      _getSecondaryMenuFlexRatio: function (value) {
+        if (this._containsMoreThanZeroItems(this.data.primaryMenu)) {
+          return "flex end-justified horizontal layout secondary-menu";
+        }
+        return "flex end-justified horizontal layout secondary-menu";
+      },
+
+      _logoTapped: function (e) {
+        window.location = this.data.logo.url;
+        return false;
       }
-    });
-    if(selectedItem){
-      if(selectedDropdown.isIconMenu)
-        this._selectedFlag = selectedItem.icon;
-      this.fire(selectedDropdown.eventName, selectedItem);
-    }
-  },
-
-  _onLogin: function(e, detail){
-    this.user.postLogin.title = detail.name;
-    this.set('user.isLoggedIn', true);
-  },
-
-  _onLogout: function(e, detail){
-    this.set('user.isLoggedIn', false);
-  },
-
-  _primaryMenuChanged: function(e, detail){
-    if(typeof(detail) === 'number')
-      this.set('data.primaryMenu.selectedIndex', detail);
-    else{
-      this._tabChanged(null, e.target.selected);
-      this.$.drawer.close();
-    }
-  },
-
-  _tabChanged: function(e,index){
-    const header = this;
-    const selectedTab = this.data.primaryMenu.items.filter(function(item,index){
-      return( index === header.data.primaryMenu.selectedIndex);
-    });
-    if(selectedTab.length> 0){
-      this.fire('t-header-primary-item-selected', selectedTab[0]);
-      if(selectedTab[0].url) {
-        window.location=   selectedTab[0].url;
-        e.stopPropagation();
-      }
-    }
-  },
-
-  _hideCount: function(count){
-    return !count || count === 0;
-  },
-
-  _isSmallScreen: function(isTablet, isMobile){
-    return isTablet || isMobile;
-  },
-
-  _recentSearchTapped: function(e){
-    this.fire('t-header-recentsearch-tapped');
-  },
-
-  _mainToolbarItemsTapped: function(e){
-    this.fire('t-header-main-toolbar-tapped', e.model.item );
-    this.$.drawer.close();
-  },
-
-  _openDrawer: function(e){
-    this.$.drawer.open();
-  },
-
-  _getDropdownLabel: function(title, value){
-    return title + ' ' + value;
-  },
-
-  _userSectionTapped: function(e){
-    if(this.user.isLoggedIn){
-      if(this.postLogin.url)
-        window.location=this.postLogin.url;
-    }
-  },
-
-  _hasUrlTrigger: function(item){
-    return (item && item.url !== undefined && item !== null && item.length > 0);
-  },
-
-  _getDropdownClasses: function(isIconMenu){
-    if(isIconMenu)
-      return "dropdown";
-    return "small dropdown" ;
-  },
-
-  _hideIfResponsiveScreenAndIconMenu: function(notDesktop, isIconMenu){
-    return notDesktop && isIconMenu;
-  },
-
-  _getTopStartMenu: function(isMobile, items){
-    if(isMobile){
-      var array=[];
-      array.push(items[0]);
-      return array;
-    }
-    return items;
-  },
-
-  _hideIfNullOrEmpty: function(items){
-    return (!items || items.length === 0);
-  },
-
-  _getCurrentIcon: function(options, item){
-    return options[parseInt(item)].icon;
-  },
-
-  _containsMoreThanZeroItems: function(menu){
-    if(menu){
-      if(Array.isArray(menu))
-        return menu.length > 0;
-      else
-        return menu.items && menu.items.length > 0;
-    }
-    return false;
-  },
-
-  _getSecondaryMenuFlexRatio: function(value){
-    if(this._containsMoreThanZeroItems(this.data.primaryMenu)){
-      return "flex end-justified horizontal layout secondary-menu";
-    }
-    return "flex end-justified horizontal layout secondary-menu";
-  },
-
-  _logoTapped: function(e){
-    window.location=this.data.logo.url;
-    return false;
-  }
-})
+    })
   </script>
 </dom-module>
