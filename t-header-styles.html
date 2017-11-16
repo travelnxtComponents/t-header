@@ -24,11 +24,13 @@
           color: #fff;
         }
       }
+
       .content-wrapper {
         max-width: var(--t-header-content-max-width, 1280px);
         margin: 0 auto;
-        padding: 0 5px;    
+        padding: 0 10px;
       }
+
       paper-button {
         font-weight: normal !important;
         font-size: 12px;
@@ -111,9 +113,11 @@
       .small {
         width: 50px;
       }
+
       .top-end-menu.small {
         margin-left: 20px;
       }
+
       .signup-section {
         margin-right: 0 !important;
       }
@@ -146,6 +150,7 @@
         color: var(--t-header-color, #a9afdf);
         height: 48px;
         line-height: 48px;
+        padding: 0;
       }
 
       .item {
@@ -255,10 +260,6 @@
           margin: 0;
           height: 60px;
         }
-        app-header,
-        .topbar {
-          padding: 0 16px;
-        }
 
         .dropdown-trigger {
           margin: 0;
@@ -309,7 +310,9 @@
         #drawer[selected="drawer"] {
           z-index: 4;
         }
-
+        .content-wrapper {
+          padding: 0 5px;
+        }
         app-header {
           z-index: 2;
         }
@@ -334,10 +337,8 @@
           height: 15px;
         }
 
-        .app-header,
         .topbar {
           z-index: 2;
-          padding: 0 5px;
         }
 
         .dropdown {
