@@ -1,9 +1,11 @@
-Setting driven items:
-Image/Logo with left and right align property
-Menu with left and right align property
-Cart enable / disable
-Points enable / disable
-Points BG / Text color
-Header BG / Text color
-Favorite list (Icon and text BG / color)
-Recent searches (Icon and text with bg / text color)
+<p><strong>Setting driven items:</strong></p>
+<ul>
+<li>Image/Logo with left and right align property</li>
+<li>Menu with left and right align property</li>
+<li>Cart enable / disable</li>
+<li>Points enable / disable</li>
+<li>Points BG / Text color</li>
+<li>Header BG / Text color</li>
+<li>Favorite list (Icon and text BG / color)</li>
+<li>Recent searches (Icon and text with bg / text color)</li>
+</ul>
